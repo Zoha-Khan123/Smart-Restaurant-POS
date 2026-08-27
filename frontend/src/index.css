@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+/* ================================
+   POPPINS
+================================ */
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./assets/fonts/Poppins/Poppins-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./assets/fonts/Poppins/Poppins-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./assets/fonts/Poppins/Poppins-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./assets/fonts/Poppins/Poppins-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* ================================
+   SMART POS DESIGN TOKENS
+================================ */
+
+@theme {
+
+  /* ---------- Font ---------- */
+
+  --font-poppins: "Poppins", sans-serif;
+
+
+  /* ---------- Brand / Primary ---------- */
+
+  --color-primary: #2563eb;
+  --color-primary-dark: #1d4ed8;
+  --color-primary-light: #eff6ff;
+
+
+  /* ---------- Background ---------- */
+
+  --color-bg-main: #f8fafc;
+  --color-bg-card: #ffffff;
+  --color-bg-sidebar: #0f172a;
+  --color-bg-hover: #f1f5f9;
+
+
+  /* ---------- Text ---------- */
+
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #64748b;
+  --color-text-muted: #94a3b8;
+  --color-text-white: #ffffff;
+
+
+  /* ---------- Border ---------- */
+
+  --color-border: #e2e8f0;
+  --color-border-light: #f1f5f9;
+
+
+  /* ---------- Success ---------- */
+
+  --color-success: #16a34a;
+  --color-success-light: #f0fdf4;
+
+
+  /* ---------- Warning ---------- */
+
+  --color-warning: #f59e0b;
+  --color-warning-light: #fffbeb;
+
+
+  /* ---------- Danger ---------- */
+
+  --color-danger: #dc2626;
+  --color-danger-light: #fef2f2;
+
+
+  /* ---------- Info ---------- */
+
+  --color-info: #0ea5e9;
+  --color-info-light: #f0f9ff;
+
+
+  /* ---------- Extra ---------- */
+
+  --color-purple: #8b5cf6;
+  --color-purple-light: #f5f3ff;
+
+  --color-orange: #f97316;
+  --color-orange-light: #fff7ed;
+}
+
+
+/* ================================
+   GLOBAL STYLES
+================================ */
+
+@layer base {
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-poppins);
+    background-color: var(--color-bg-main);
+    color: var(--color-text-primary);
+  }
+}
