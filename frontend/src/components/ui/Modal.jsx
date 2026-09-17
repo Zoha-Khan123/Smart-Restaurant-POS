@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { X } from "lucide-react";
 
 /**
- * Reusable Modal Dialog Component for Smart POS
+ * Reusable Modal Dialog Component for Super Admin
  */
 export default function Modal({
   isOpen,

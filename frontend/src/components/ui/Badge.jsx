@@ -8,6 +8,7 @@ export default function Badge({
   variant = "default",
   size = "md",
   className = "",
+  dot = false,
 }) {
   const variantStyles = {
     default: "bg-bg-main text-text-secondary border-border",
@@ -17,6 +18,22 @@ export default function Badge({
     danger: "bg-danger-light text-danger border-danger/20",
     purple: "bg-purple-50 text-purple-700 border-purple-200",
     info: "bg-blue-50 text-blue-700 border-blue-200",
+    orange: "bg-orange-50 text-orange-700 border-orange-200",
+    indigo: "bg-indigo-50 text-indigo-700 border-indigo-200",
+    teal: "bg-teal-50 text-teal-700 border-teal-200",
+  };
+
+  const dotColors = {
+    default: "bg-text-secondary",
+    primary: "bg-primary",
+    success: "bg-emerald-500",
+    warning: "bg-amber-500",
+    danger: "bg-danger",
+    purple: "bg-purple-500",
+    info: "bg-blue-500",
+    orange: "bg-orange-500",
+    indigo: "bg-indigo-500",
+    teal: "bg-teal-500",
   };
 
   const sizeStyles = {
@@ -27,10 +44,17 @@ export default function Badge({
 
   return (
     <span
-      className={`inline-flex items-center font-bold rounded-lg border shadow-2xs select-none ${
+      className={`inline-flex items-center gap-1.5 font-semibold rounded-lg border shadow-2xs select-none transition-colors ${
         variantStyles[variant] || variantStyles.default
       } ${sizeStyles[size] || sizeStyles.md} ${className}`.trim()}
     >
+      {dot && (
+        <span
+          className={`w-1.5 h-1.5 rounded-full shrink-0 ${
+            dotColors[variant] || dotColors.default
+          }`}
+        />
+      )}
       {children}
     </span>
   );

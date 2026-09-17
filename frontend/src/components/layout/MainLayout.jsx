@@ -2,18 +2,20 @@ import React, { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
+import { useAuth } from "../../context/AuthContext";
 
 /**
- * Smart POS - Main Layout
- * Wraps all application routes with a persistent Sidebar, Header, and responsive main content area.
+ * Super Admin - Main Layout
+ * Wraps all Super Admin application routes with persistent Sidebar, Top Header, and responsive main content area.
  */
 export default function MainLayout() {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const { logout } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    // In future this will trigger authContext.logout()
-    navigate("/login");
+  const handleLogout = async () => {
+    await logout();
+    navigate("/super-admin/login", { replace: true });
   };
 
   return (
@@ -29,10 +31,13 @@ export default function MainLayout() {
       <div className="flex-1 flex flex-col lg:pl-64 min-w-0">
         
         {/* Top Header */}
-        <Header onOpenMobileSidebar={() => setIsMobileSidebarOpen(true)} />
+        <Header
+          onOpenMobileSidebar={() => setIsMobileSidebarOpen(true)}
+          onLogout={handleLogout}
+        />
 
         {/* Dynamic Nested Page Content */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto min-w-0 overflow-x-hidden">
           <Outlet />
         </main>
       </div>

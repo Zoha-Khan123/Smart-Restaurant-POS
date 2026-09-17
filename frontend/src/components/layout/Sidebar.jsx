@@ -2,59 +2,58 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard,
-  ShoppingBag,
-  ClipboardList,
-  LayoutGrid,
-  ChefHat,
-  CreditCard,
-  UtensilsCrossed,
-  Boxes,
+  Store,
   Users,
+  CreditCard,
+  Layers,
+  Receipt,
   BarChart3,
-  UserCog,
+  Bell,
+  ShieldAlert,
   Settings,
+  LifeBuoy,
   User,
   LogOut,
   X,
+  Shield,
 } from "lucide-react";
 
 /**
- * Smart POS - Navigation Items Configuration
+ * Super Admin Navigation Items Configuration
  */
 const NAV_ITEMS = [
-  { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
-  { name: "Order Taker", path: "/order-taker", icon: ShoppingBag },
-  { name: "Orders", path: "/orders", icon: ClipboardList },
-  { name: "Tables", path: "/tables", icon: LayoutGrid },
-  { name: "Kitchen / KOT", path: "/kot", icon: ChefHat },
-  { name: "Billing", path: "/billing", icon: CreditCard },
-  { name: "Menu", path: "/menu", icon: UtensilsCrossed },
-  { name: "Inventory", path: "/inventory", icon: Boxes },
-  { name: "Customers", path: "/customers", icon: Users },
-  { name: "Reports", path: "/reports", icon: BarChart3 },
-  { name: "Staff", path: "/staff", icon: UserCog },
+  { name: "Dashboard", path: "/super-admin/dashboard", icon: LayoutDashboard },
+  { name: "Restaurants", path: "/super-admin/restaurants", icon: Store },
+  { name: "Users", path: "/super-admin/users", icon: Users },
+  { name: "Subscriptions", path: "/super-admin/subscriptions", icon: CreditCard },
+  { name: "Subscription Plans", path: "/super-admin/subscription-plans", icon: Layers },
+  { name: "Payments & Invoices", path: "/super-admin/payments", icon: Receipt },
+  { name: "Reports & Analytics", path: "/super-admin/reports", icon: BarChart3 },
+  { name: "Notifications", path: "/super-admin/notifications", icon: Bell, badge: "3" },
+  { name: "Audit Logs", path: "/super-admin/audit-logs", icon: ShieldAlert },
 ];
 
 const BOTTOM_ITEMS = [
-  { name: "Settings", path: "/settings", icon: Settings },
-  { name: "Profile", path: "/profile", icon: User },
+  { name: "Settings", path: "/super-admin/settings", icon: Settings },
+  { name: "Support", path: "/super-admin/support", icon: LifeBuoy },
+  { name: "Profile", path: "/super-admin/profile", icon: User },
 ];
 
 /**
- * Smart POS - Sidebar Navigation Component
- * Supports responsive drawer behavior for mobile and fixed full-height for desktop.
+ * Super Admin - Sidebar Navigation Component
+ * Matches the exact styling, dimensions, active/hover states, and responsive behavior of the Restaurant Admin sidebar.
  */
 export default function Sidebar({ isOpen = false, onClose = () => {}, onLogout }) {
   const handleLogout = () => {
     if (onLogout) {
       onLogout();
     } else {
-      console.log("User logged out");
+      console.log("Super Admin logged out");
     }
   };
 
   const navLinkClasses = ({ isActive }) =>
-    `flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm transition-all duration-150 select-none group ${
+    `flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm transition-all duration-150 select-none group ${
       isActive
         ? "bg-primary text-text-white font-medium shadow-sm shadow-primary/20"
         : "text-text-muted hover:text-text-white hover:bg-white/5 font-normal"
@@ -78,27 +77,26 @@ export default function Sidebar({ isOpen = false, onClose = () => {}, onLogout }
         }`}
       >
         {/* =========================================
-            HEADER: LOGO & BRANDING
+            HEADER: LOGO & SUPER ADMIN BRANDING
         ========================================== */}
         <div className="p-5 flex items-center justify-between border-b border-white/10 shrink-0">
           <div className="flex items-center gap-3">
-            {/* Golden Restaurant Logo Badge */}
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-md shadow-amber-500/20 shrink-0">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                className="w-5 h-5 text-slate-950 fill-current"
-              >
-                <path d="M12 3a1 1 0 0 0-1 1v.08C7.16 4.54 4 7.86 4 12v1a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-1c0-4.14-3.16-7.46-7-7.92V4a1 1 0 0 0-1-1zm-9 13a1 1 0 0 0 0 2h18a1 1 0 1 0 0-2H3zm5-5.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5zm8 0a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5zm-4 0a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5z" />
-              </svg>
+            {/* Super Admin Shield/Crown Badge */}
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-purple flex items-center justify-center shadow-md shadow-primary/30 shrink-0">
+              <Shield className="w-5 h-5 text-white" />
             </div>
 
             <div>
-              <h1 className="text-base font-bold text-text-white tracking-tight leading-none">
-                Smart POS
-              </h1>
+              <div className="flex items-center gap-1.5">
+                <h1 className="text-base font-bold text-text-white tracking-tight leading-none">
+                  Smart POS
+                </h1>
+                <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-primary/30 text-primary-light border border-primary/40">
+                  Super
+                </span>
+              </div>
               <p className="text-[11px] font-medium text-amber-400 tracking-wide mt-1">
-                Café & Restaurant
+                Platform Admin
               </p>
             </div>
           </div>
@@ -118,6 +116,9 @@ export default function Sidebar({ isOpen = false, onClose = () => {}, onLogout }
             NAVIGATION LINKS (SCROLLABLE)
         ========================================== */}
         <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto scrollbar-thin scrollbar-thumb-white/10">
+          <div className="px-3.5 pb-2 text-[10px] font-bold text-text-muted/70 uppercase tracking-wider">
+            Main Menu
+          </div>
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
             return (
@@ -127,17 +128,27 @@ export default function Sidebar({ isOpen = false, onClose = () => {}, onLogout }
                 onClick={onClose}
                 className={navLinkClasses}
               >
-                <Icon className="w-4 h-4 shrink-0 transition-transform duration-150 group-hover:scale-105" />
-                <span>{item.name}</span>
+                <div className="flex items-center gap-3">
+                  <Icon className="w-4 h-4 shrink-0 transition-transform duration-150 group-hover:scale-105" />
+                  <span>{item.name}</span>
+                </div>
+                {item.badge && (
+                  <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-danger/80 text-white leading-none">
+                    {item.badge}
+                  </span>
+                )}
               </NavLink>
             );
           })}
         </nav>
 
         {/* =========================================
-            BOTTOM SECTION: SETTINGS, PROFILE & LOGOUT
+            BOTTOM SECTION: SETTINGS, SUPPORT, PROFILE & LOGOUT
         ========================================== */}
         <div className="p-3 border-t border-white/10 space-y-1 shrink-0 bg-bg-sidebar">
+          <div className="px-3.5 pb-1 text-[10px] font-bold text-text-muted/70 uppercase tracking-wider">
+            System
+          </div>
           {BOTTOM_ITEMS.map((item) => {
             const Icon = item.icon;
             return (
@@ -147,8 +158,10 @@ export default function Sidebar({ isOpen = false, onClose = () => {}, onLogout }
                 onClick={onClose}
                 className={navLinkClasses}
               >
-                <Icon className="w-4 h-4 shrink-0 transition-transform duration-150 group-hover:scale-105" />
-                <span>{item.name}</span>
+                <div className="flex items-center gap-3">
+                  <Icon className="w-4 h-4 shrink-0 transition-transform duration-150 group-hover:scale-105" />
+                  <span>{item.name}</span>
+                </div>
               </NavLink>
             );
           })}

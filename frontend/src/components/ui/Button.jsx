@@ -1,8 +1,7 @@
 import React from "react";
 
 /**
- * Reusable Button component for Smart POS
- * Supports loading state, disabled state, variants, and custom classes.
+ * Reusable Button component matching Smart POS design tokens
  */
 export default function Button({
   children,
@@ -12,21 +11,32 @@ export default function Button({
   onClick,
   className = "",
   variant = "primary",
+  size = "md",
+  icon: Icon,
+  iconPosition = "left",
   fullWidth = false,
   ...props
 }) {
   const baseStyles =
-    "inline-flex items-center justify-center font-medium rounded-lg text-sm px-5 py-3 transition-all duration-150 focus:outline-none select-none active:scale-[0.99]";
+    "inline-flex items-center justify-center font-medium rounded-lg transition-all duration-150 focus:outline-none select-none active:scale-[0.99] gap-2";
+
+  const sizeStyles = {
+    sm: "text-xs px-3 py-1.5 rounded-md",
+    md: "text-sm px-4 py-2.5 rounded-lg",
+    lg: "text-sm sm:text-base px-5 py-3 rounded-xl font-semibold",
+  };
 
   const variantStyles = {
     primary:
       "bg-primary text-text-white hover:bg-primary-dark focus:ring-2 focus:ring-primary/30 shadow-sm",
     secondary:
-      "bg-bg-hover text-text-primary hover:bg-border-light border border-border focus:ring-2 focus:ring-text-secondary/20",
+      "bg-bg-hover text-text-primary hover:bg-border border border-border focus:ring-2 focus:ring-text-secondary/20",
     outline:
       "bg-transparent border border-border text-text-primary hover:bg-bg-hover focus:ring-2 focus:ring-primary/20",
     danger:
       "bg-danger text-text-white hover:opacity-90 focus:ring-2 focus:ring-danger/30 shadow-sm",
+    ghost:
+      "bg-transparent text-text-secondary hover:text-text-primary hover:bg-bg-hover",
   };
 
   const stateStyles =
@@ -41,7 +51,9 @@ export default function Button({
       type={type}
       disabled={disabled || loading}
       onClick={onClick}
-      className={`${baseStyles} ${variantStyles[variant] || variantStyles.primary} ${stateStyles} ${widthStyle} ${className}`.trim()}
+      className={`${baseStyles} ${sizeStyles[size] || sizeStyles.md} ${
+        variantStyles[variant] || variantStyles.primary
+      } ${stateStyles} ${widthStyle} ${className}`.trim()}
       {...props}
     >
       {loading ? (
@@ -67,10 +79,14 @@ export default function Button({
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
             />
           </svg>
-          <span>Signing in...</span>
+          <span>Loading...</span>
         </span>
       ) : (
-        children
+        <>
+          {Icon && iconPosition === "left" && <Icon className="w-4 h-4 shrink-0" />}
+          {children}
+          {Icon && iconPosition === "right" && <Icon className="w-4 h-4 shrink-0" />}
+        </>
       )}
     </button>
   );

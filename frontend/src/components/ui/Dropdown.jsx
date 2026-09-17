@@ -2,7 +2,7 @@ import React from "react";
 import { ChevronDown } from "lucide-react";
 
 /**
- * Reusable Dropdown / Select Component
+ * Reusable Dropdown / Select Component matching Smart POS design tokens
  */
 export default function Dropdown({
   label,
@@ -13,17 +13,26 @@ export default function Dropdown({
   disabled = false,
   error,
   className = "",
+  containerClassName = "",
   id,
   name,
+  size = "md",
 }) {
-  const selectId = id || name || `dropdown-${Math.random().toString(36).substr(2, 9)}`;
+  const selectId =
+    id || name || `dropdown-${Math.random().toString(36).substring(2, 9)}`;
+
+  const sizeStyles = {
+    sm: "py-1.5 text-xs pl-3 pr-8",
+    md: "py-2.5 text-sm pl-3.5 pr-9",
+    lg: "py-3 text-base pl-4 pr-10",
+  };
 
   return (
-    <div className="w-full flex flex-col">
+    <div className={`w-full flex flex-col ${containerClassName}`}>
       {label && (
         <label
           htmlFor={selectId}
-          className="text-xs font-medium text-text-primary mb-1.5"
+          className="text-xs font-semibold text-text-primary mb-1.5"
         >
           {label}
         </label>
@@ -36,11 +45,15 @@ export default function Dropdown({
           value={value}
           onChange={onChange}
           disabled={disabled}
-          className={`w-full appearance-none rounded-lg text-sm pl-3.5 pr-9 py-2.5 bg-bg-card text-text-primary border transition-all duration-150 outline-none cursor-pointer ${
+          className={`w-full appearance-none rounded-lg bg-bg-card text-text-primary border transition-all duration-150 outline-none cursor-pointer ${
+            sizeStyles[size] || sizeStyles.md
+          } ${
             error
               ? "border-danger focus:border-danger focus:ring-2 focus:ring-danger/20"
               : "border-border hover:border-text-muted focus:border-primary focus:ring-2 focus:ring-primary/20"
-          } ${disabled ? "bg-bg-hover opacity-60 cursor-not-allowed" : ""} ${className}`.trim()}
+          } ${
+            disabled ? "bg-bg-hover opacity-60 cursor-not-allowed" : ""
+          } ${className}`.trim()}
         >
           {placeholder && (
             <option value="" disabled>
@@ -52,7 +65,11 @@ export default function Dropdown({
             const optVal = isObject ? opt.value : opt;
             const optLabel = isObject ? opt.label : opt;
             return (
-              <option key={optVal} value={optVal} className="bg-bg-card text-text-primary">
+              <option
+                key={optVal}
+                value={optVal}
+                className="bg-bg-card text-text-primary"
+              >
                 {optLabel}
               </option>
             );
@@ -64,7 +81,9 @@ export default function Dropdown({
         </div>
       </div>
 
-      {error && <p className="mt-1 text-xs text-danger font-medium">{error}</p>}
+      {error && (
+        <p className="mt-1 text-xs text-danger font-medium">{error}</p>
+      )}
     </div>
   );
 }
